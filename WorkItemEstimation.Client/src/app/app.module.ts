@@ -3,16 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreateOrJoinRoomComponent } from './create-or-join-room/create-or-join-room.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JoinRoomComponent } from './join-room/join-room.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateOrJoinRoomComponent,
-    HeaderComponent
+    HeaderComponent,
+    JoinRoomComponent
   ],
   imports: [
     BrowserModule,
