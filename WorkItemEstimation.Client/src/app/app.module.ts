@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JoinRoomComponent } from './join-room/join-room.component'
+import { JoinRoomComponent } from './join-room/join-room.component';
+import { RoomCreatedDialogComponent } from './room-created-dialog/room-created-dialog.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    JoinRoomComponent
+    JoinRoomComponent,
+    RoomCreatedDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<h1>New Room Created</h1>
+<div class="content">
+  <mat-form-field>
+    <mat-label>Room ID</mat-label>
+    <input matInput readonly placeholder="Room ID"
+      value="924aa02a-b2df-4cce-b4ac-1e8804447bcb">
+    <button mat-icon-button matSuffix matTooltip="Copy to clipboard">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Share link</mat-label>
+    <input matInput readonly placeholder="Room ID"
+      value="http://localhost:4200/rooms/924aa02a-b2df-4cce-b4ac-1e8804447bcb">
+    <button mat-icon-button matSuffix matTooltip="Copy to clipboard">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<button mat-flat-button color="primary" (click)="close()">Done</button>
