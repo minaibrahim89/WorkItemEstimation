@@ -11,16 +11,26 @@ internal static class HttpRequestDataExtensions
         {
             var request = await req.ReadFromJsonAsync<T>();
 
-            if (request is null)
+            if (request == null)
                 return default;
 
             customInit?.Invoke(request);
-            Validator.ValidateObject(request, new(request));
+            ValidateRequest(request);
+
             return request;
         }
         catch
         {
             return default;
         }
+    }
+
+    private static void ValidateRequest(object request)
+    {
+        var validationResults = new List<ValidationResult>();
+        var isValid = Validator.TryValidateObject(request, new(request), validationResults, true);
+
+        if (!isValid)
+            throw new ValidationException(string.Join("\n", validationResults.Select(r => r.ErrorMessage)));
     }
 }

@@ -8,16 +8,19 @@ public class Room
 {
     private readonly Lazy<TableEntity> _tableEntity;
 
-    public Room(string name)
+    public Room(string name, string[] allowedValues)
     {
         Guard.Against.NullOrWhiteSpace(name);
+        Guard.Against.NullOrEmpty(allowedValues);
 
         Name = name;
+        AllowedValues = allowedValues;
         Id = Guid.NewGuid().ToString();
 
         _tableEntity = new(() => new(Id, Id)
         {
             ["Name"] = Name,
+            ["AllowedValues"] = string.Join("\n", AllowedValues),
             ["VotesRevealed"] = VotesRevealed
         });
     }
@@ -26,12 +29,19 @@ public class Room
     public string Id { get; init; }
     public string Name { get; set; }
     public bool VotesRevealed { get; set; }
+    public string[] AllowedValues { get; set; }
 
     public TableEntity ToEntity() => _tableEntity.Value;
 
-    public static Room FromEntity(TableEntity entity) => new((string)entity["Name"])
+    public static Room FromEntity(TableEntity entity)
     {
-        Id = entity.RowKey,
-        VotesRevealed = (bool)entity["VotesRevealed"]
-    };
+        var name = (string)entity["Name"];
+        var allowedValues = (string)entity["AllowedValues"];
+
+        return new(name, allowedValues.Split("\n"))
+        {
+            Id = entity.RowKey,
+            VotesRevealed = (bool)entity["VotesRevealed"]
+        };
+    }
 }

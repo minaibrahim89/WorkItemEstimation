@@ -21,7 +21,7 @@ public class CreateRoom(ILoggerFactory loggerFactory, StorageClient storageClien
         if (createRoomRequest is null)
             return req.CreateResponse(HttpStatusCode.BadRequest);
 
-        var room = new Room(createRoomRequest.Name);
+        var room = new Room(createRoomRequest.Name, createRoomRequest.AllowedValues);
         await _storageClient.AddOrUpdate<Room>(room.ToEntity());
 
         var response = req.CreateResponse(HttpStatusCode.OK);
