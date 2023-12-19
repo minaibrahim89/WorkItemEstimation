@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class RoomCreatedDialogComponent {
 
   roomId = '924aa02a-b2df-4cce-b4ac-1e8804447bcb';
-  inviteUrl = 'http://localhost:4200/rooms/' + this.roomId;
+  inviteUrl = 'http://localhost:4200/room/' + this.roomId;
 
   constructor(private dialogRef: DialogRef) {
   }

@@ -9,13 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JoinRoomComponent } from './join-room/join-room.component';
 import { RoomCreatedDialogComponent } from './room-created-dialog/room-created-dialog.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RoomComponent } from './room/room.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     JoinRoomComponent,
-    RoomCreatedDialogComponent
+    RoomCreatedDialogComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,

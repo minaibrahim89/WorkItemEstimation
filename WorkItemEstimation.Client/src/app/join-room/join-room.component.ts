@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoomCreatedDialogComponent } from '../room-created-dialog/room-created-dialog.component';
 import { take } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-join-room',
@@ -14,11 +15,15 @@ export class JoinRoomComponent {
   form: FormGroup;
 
   constructor(private dialog: Dialog,
-              private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private router: Router) {
     this.form = this.formBuilder.group({
       roomId: ['', Validators.required],
-      name: ['', Validators.required],
     });
+  }
+
+  get roomId(): string {
+    return this.form.get('roomId')?.value ?? "";
   }
 
   public createRoom(): void {
@@ -28,12 +33,23 @@ export class JoinRoomComponent {
       .pipe(take(1))
       .subscribe(roomId => {
         if (roomId) {
-          this.form?.patchValue({ roomId: <string>roomId });
+          this.setRoomId(<string>roomId);
+          this.join();
         }
       });
   }
 
+  private setRoomId(roomId: string) {
+    this.form?.patchValue({ roomId });
+  }
+
   onSubmit() {
-    throw new Error('Method not implemented.');
+    if (this.form.valid) {
+      this.join();
+    }
+  }
+
+  private join() {
+    this.router.navigate(['/room', this.roomId]);
   }
 }
