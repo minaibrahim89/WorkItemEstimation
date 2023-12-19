@@ -1,5 +1,5 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import {Dialog, DialogModule, DialogRef} from '@angular/cdk/dialog';
 import { RoomCreatedDialogComponent } from '../room-created-dialog/room-created-dialog.component';
 
 @Component({
