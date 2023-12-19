@@ -26,8 +26,9 @@ public class PutVote(ILoggerFactory loggerFactory, StorageClient storageClient)
             return req.CreateResponse(HttpStatusCode.BadRequest);
 
         HttpResponseData response;
+        var roomEntity = await _storageClient.Get<Room>(roomId, roomId);
 
-        if (!await _storageClient.Exists<Room>(roomId, roomId))
+        if (roomEntity == null)
         {
             response = req.CreateResponse(HttpStatusCode.NotFound);
             await response.WriteStringAsync("Room does not exist");
@@ -38,6 +39,16 @@ public class PutVote(ILoggerFactory loggerFactory, StorageClient storageClient)
         {
             response = req.CreateResponse(HttpStatusCode.NotFound);
             await response.WriteStringAsync("Voter does not exist");
+            return response;
+        }
+
+        var room = Room.FromEntity(roomEntity);
+        var allowedValues = room.AllowedValues;
+
+        if (!allowedValues.Contains(voteRequest.Value))
+        {
+            response = req.CreateResponse(HttpStatusCode.BadRequest);
+            await response.WriteStringAsync("Vote value not allowed");
             return response;
         }
 
