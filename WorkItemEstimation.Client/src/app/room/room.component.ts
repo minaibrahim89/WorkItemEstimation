@@ -1,5 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { VoterNameDialogComponent } from '../voter-name-dialog/voter-name-dialog.component';
@@ -16,7 +16,7 @@ export class RoomComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private dialog: Dialog) {
+    private dialog: MatDialog) {
   }
 
   public ngOnInit(): void {
@@ -26,20 +26,19 @@ export class RoomComponent implements OnInit {
   }
 
   private onRoomEnter(roomId: string) {
-    console.log('on room enter:', roomId);
     this._roomId = roomId;
     this.voterName = this.getVoterName() ?? '';
 
     if (!this.voterName) {
-      const dialogRef = this.dialog.open(VoterNameDialogComponent);
+      const dialogRef = this.dialog.open(VoterNameDialogComponent, { data: this.voterName });
 
-      dialogRef.closed
+      dialogRef.afterClosed()
         .pipe(take(1))
         .subscribe(name => {
           if (name) {
             this.setVoterName(<string>name!);
           } else {
-            this.router.navigateByUrl('/');
+            this.router.navigate(['/']);
           }
         })
     }

@@ -1,6 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import { RoomCreatedDialogComponent } from '../room-created-dialog/room-created-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,10 +8,10 @@ import { RoomCreatedDialogComponent } from '../room-created-dialog/room-created-
 })
 export class HeaderComponent {
 
-  constructor(private dialog: Dialog) {
+  constructor(private router: Router) {
   }
 
   public createRoom(): void {
-    this.dialog.open(RoomCreatedDialogComponent);
+    this.router.navigate(['create-room'])
   }
 }

@@ -1,6 +1,6 @@
-import { DialogRef } from '@angular/cdk/dialog';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-voter-name-dialog',
@@ -12,11 +12,12 @@ export class VoterNameDialogComponent {
   form: FormGroup;
 
   constructor(
-    private dialogRef: DialogRef,
+    @Inject(MAT_DIALOG_DATA) private data: string,
+    private dialogRef: MatDialogRef<VoterNameDialogComponent>,
     private formBuilder: FormBuilder) {
 
     this.form = this.formBuilder.group({
-      name: ['', Validators.required]
+      name: [this.data, Validators.required]
     });
   }
 

@@ -1,0 +1,20 @@
+<div class="dialog-container">
+  <h1>Create Room</h1>
+  <p>Enter a name for the room and choose allowed vote values.</p>
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="dialog-content">
+      <mat-form-field>
+        <input matInput placeholder="Room Name" formControlName="name">
+      </mat-form-field>
+      <mat-selection-list [multiple]="false" (selectionChange)="onAllowedValuesSelected($event)">
+        <mat-list-option *ngFor="let option of defaultAllowedValuesSets"
+          [value]="option.values">{{option.display()}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+    <div class="dialog-actions">
+      <button mat-button type="submit" color="primary">Create</button>
+      <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

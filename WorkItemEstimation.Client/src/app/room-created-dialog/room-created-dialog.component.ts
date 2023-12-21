@@ -1,5 +1,7 @@
-import { DialogRef } from '@angular/cdk/dialog';
-import { Component } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Room } from '../model/room';
 
 @Component({
   selector: 'app-room-created-dialog',
@@ -8,10 +10,19 @@ import { Component } from '@angular/core';
 })
 export class RoomCreatedDialogComponent {
 
-  roomId = '924aa02a-b2df-4cce-b4ac-1e8804447bcb';
-  inviteUrl = 'http://localhost:4200/room/' + this.roomId;
+  roomId = '';
+  inviteUrl = '';
 
-  constructor(private dialogRef: DialogRef) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Room,
+    private dialogRef: MatDialogRef<RoomCreatedDialogComponent>,
+    private clipboard: Clipboard) {
+      this.roomId = data.id;
+      this.inviteUrl = 'http://localhost:4200/room/' + this.roomId;
+  }
+
+  copyToClipboard(text: string) {
+    this.clipboard.copy(text);
   }
 
   public onJoin() {
