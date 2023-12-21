@@ -10,6 +10,7 @@ import { JoinRoomComponent } from './join-room/join-room.component';
 import { RoomCreatedDialogComponent } from './room-created-dialog/room-created-dialog.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RoomComponent } from './room/room.component';
+import { VoterNameDialogComponent } from './voter-name-dialog/voter-name-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RoomComponent } from './room/room.component';
     HeaderComponent,
     JoinRoomComponent,
     RoomCreatedDialogComponent,
-    RoomComponent
+    RoomComponent,
+    VoterNameDialogComponent
   ],
   imports: [
     BrowserModule,

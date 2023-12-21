@@ -1,9 +1,9 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, OnInit } from '@angular/core';
-import { RoomCreatedDialogComponent } from '../room-created-dialog/room-created-dialog.component';
-import { take } from 'rxjs';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
+import { RoomCreatedDialogComponent } from '../room-created-dialog/room-created-dialog.component';
 
 @Component({
   selector: 'app-join-room',

@@ -1,0 +1,17 @@
+<div class="dialog-container">
+  <h1>Voter Display Name</h1>
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="dialog-content">
+      <mat-form-field>
+        <mat-label>Display name</mat-label>
+        <input matInput placeholder="John Doe" [value]="form.get('name')?.value"
+          formControlName="name">
+      </mat-form-field>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-flat-button type="submit" color="primary">Enter</button>
+      <button mat-flat-button type="button" (click)="onLeave()">Leave</button>
+    </div>
+  </form>
+</div>
